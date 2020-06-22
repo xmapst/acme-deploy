@@ -1,13 +1,29 @@
 # acme-deploy
 acme renew, deploy nginx/kong/istio, Automatically detect expiration time
 
+## Install 
+#### Binary installation
+Download the binary file suitable for your platform from [release](https://github.com/xmapst/acme-deploy/releases)  
+```bash
+wget https://github.com/xmapst/acme-deploy/releases/acme_linux_amd64.tar.gz
+tar zxr -C /usr/local/bin acme_linux_amd64.tar.gz
+```
+#### Source installation  
+go version go1.14.4 linux/amd64
+```bash
+git clone https://github.com/xmapst/acme-deploy.git
+cd acme-deploy
+chmod +x build.sh
+./build.sh
+```
+
 ## deploy nginx(example dnspod)
 ```bash
 export DNSPOD_API_KEY=xxxxxxxxxxxxx  
 export DNSPOD_HTTP_TIMEOUT=60  
 export CERT_PATH=/path/ssl.cert  
 export KEY_PATH=/path/ssl.key  
-./acme --dns dnspod -d *.example.com -m username@example.com --deploy nginx run  
+acme --dns dnspod -d *.example.com -m username@example.com --deploy nginx run  
 ```
 
 ## deploy kong(example dnspod)
@@ -15,7 +31,7 @@ export KEY_PATH=/path/ssl.key
 export DNSPOD_API_KEY=xxxxxxxxxxxxx  
 export DNSPOD_HTTP_TIMEOUT=60  
 export KONG_ADMIN_ADDR=http://kong.kong:8001  
-./acme --dns dnspod -d *.example.com -m username@example.com --deploy kong run  
+acme --dns dnspod -d *.example.com -m username@example.com --deploy kong run  
 ```
 
 ## deploy istio(example dnspod)
@@ -27,12 +43,12 @@ export NAMESPACE=istio-system
 export SECRETNAME=istio-ssl  
 export CERT=ssl-cert  
 export KEY=ssl-key  
-./acme --dns dnspod -d *.example.com -m username@example.com --deploy secret run  
+acme --dns dnspod -d *.example.com -m username@example.com --deploy secret run  
 ```
 
 ## Help
 ```bash
-$ ./acme --help
+$ acme --help
 NAME:
    acme - Let's Encrypt client written in Go
 
