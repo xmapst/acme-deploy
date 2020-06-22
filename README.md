@@ -1,5 +1,34 @@
 # acme-deploy
-acme renew, deploy nginx/kong/istio
+acme renew, deploy nginx/kong/istio, Automatically detect expiration time
+
+## deploy nginx(example dnspod)
+```bash
+export DNSPOD_API_KEY=xxxxxxxxxxxxx  
+export DNSPOD_HTTP_TIMEOUT=60  
+export CERT_PATH=/path/ssl.cert  
+export KEY_PATH=/path/ssl.key  
+./acme --dns dnspod -d *.example.com -m username@example.com --deploy nginx run  
+```
+
+## deploy kong(example dnspod)
+```bash
+export DNSPOD_API_KEY=xxxxxxxxxxxxx  
+export DNSPOD_HTTP_TIMEOUT=60  
+export KONG_ADMIN_ADDR=http://kong.kong:8001  
+./acme --dns dnspod -d *.example.com -m username@example.com --deploy kong run  
+```
+
+## deploy istio(example dnspod)
+```bash
+export DNSPOD_API_KEY=xxxxxxxxxxxxx  
+export DNSPOD_HTTP_TIMEOUT=60  
+export KUBECONF=/path/kube.config  
+export NAMESPACE=istio-system  
+export SECRETNAME=istio-ssl  
+export CERT=ssl-cert  
+export KEY=ssl-key  
+./acme --dns dnspod -d *.example.com -m username@example.com --deploy secret run  
+```
 
 ## Help
 ```bash
